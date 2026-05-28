@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tata Nama Senyawa Biner Kovalen</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f0c29;
+    --bg2: #1a1545;
+    --card: rgba(255,255,255,0.07);
+    --border: rgba(255,255,255,0.12);
+    --accent1: #7C3AED;
+    --accent2: #06B6D4;
+    --accent3: #F59E0B;
+    --accent4: #10B981;
+    --text: #F1F5F9;
+    --muted: #94A3B8;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 10% 15%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 30% 40%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 20%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 75% 60%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 90% 10%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 20% 80%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 65% 85%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(2px 2px at 45% 50%, rgba(255,255,255,0.2) 0%, transparent 100%),
+      radial-gradient(1px 1px at 85% 35%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 5% 55%, rgba(255,255,255,0.4) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .hero {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 60px 20px 40px;
+  }
+  .molecule-emoji {
+    font-size: 80px;
+    animation: float 3s ease-in-out infinite;
+    display: block;
+    margin-bottom: 16px;
+  }
+  @keyframes float {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+  .hero-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--accent1), var(--accent2));
+    color: white;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    border-radius: 30px;
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(28px, 7vw, 52px);
+    font-weight: 700;
+    line-height: 1.1;
+    background: linear-gradient(135deg, #fff 0%, var(--accent2) 60%, var(--accent1) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 12px;
+  }
+  .hero p {
+    color: var(--muted);
+    font-size: 16px;
+    max-width: 480px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+  .tabs {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 20px 20px 12px;
+    flex-wrap: wrap;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(15,12,41,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .tab-btn {
+    padding: 8px 18px;
+    border-radius: 30px;
+    border: 1.5px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    font-family: 'Nunito', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.25s;
+  }
+  .tab-btn:hover { border-color: var(--accent2); color: var(--accent2); }
+  .tab-btn.active {
+    background: linear-gradient(135deg, var(--accent1), var(--accent2));
+    border-color: transparent;
+    color: white;
+    box-shadow: 0 4px 20px rgba(124,58,237,0.4);
+  }
+  .section { display: none; padding: 32px 20px 60px; max-width: 780px; margin: 0 auto; }
+  .section.active { display: block; }
+  .section-heading {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 20px;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 24px;
+    margin-bottom: 18px;
+    position: relative;
+    overflow: hidden;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent1), var(--accent2));
+  }
+  .card-icon { font-size: 36px; margin-bottom: 12px; display: block; }
+  .card h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--accent2);
+    margin-bottom: 10px;
+  }
+  .card p, .card li {
+    font-size: 15px;
+    color: #CBD5E1;
+    line-height: 1.7;
+    margin-bottom: 6px;
+  }
+  .card ul { padding-left: 20px; }
+  .highlight {
+    display: inline-block;
+    background: rgba(124,58,237,0.25);
+    color: #C4B5FD;
+    border-radius: 6px;
+    padding: 2px 8px;
+    font-weight: 700;
+    font-size: 14px;
+    font-family: 'Space Grotesk', sans-serif;
+  }
+  .prefix-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 12px;
+    font-size: 14px;
+  }
+  .prefix-table th {
+    background: rgba(124,58,237,0.3);
+    color: #C4B5FD;
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 800;
+    font-size: 13px;
+  }
+  .prefix-table td {
+    padding: 9px 14px;
+    color: #CBD5E1;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .prefix-table tr:nth-child(even) td { background: rgba(255,255,255,0.03); }
+  .example-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(6,182,212,0.15);
+    border: 1px solid rgba(6,182,212,0.3);
+    border-radius: 10px;
+    padding: 6px 12px;
+    font-size: 14px;
+    color: var(--accent2);
+    font-weight: 700;
+    margin: 4px;
+  }
+  .arrow { color: var(--accent3); }
+  /* LATIHAN */
+  .soal-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 24px;
+    margin-bottom: 18px;
+  }
+  .soal-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 14px;
+  }
+  .badge-mudah { background: rgba(16,185,129,0.2); color: #6EE7B7; }
+  .badge-sedang { background: rgba(245,158,11,0.2); color: #FCD34D; }
+  .badge-sulit { background: rgba(239,68,68,0.2); color: #FCA5A5; }
+  .soal-text {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 16px;
+    line-height: 1.5;
+  }
+  .formula-big {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--accent2);
+    text-align: center;
+    margin: 12px 0;
+  }
+  .options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .opt {
+    padding: 12px 16px;
+    border-radius: 12px;
+    border: 1.5px solid var(--border);
+    background: transparent;
+    color: var(--text);
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: left;
+  }
+  .opt:hover:not(.disabled) { border-color: var(--accent2); background: rgba(6,182,212,0.1); }
+  .opt.correct { border-color: var(--accent4) !important; background: rgba(16,185,129,0.15) !important; color: #6EE7B7 !important; }
+  .opt.wrong { border-color: #EF4444 !important; background: rgba(239,68,68,0.15) !important; color: #FCA5A5 !important; }
+  .opt.disabled { cursor: default; pointer-events: none; }
+  .reveal-btn {
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: 1.5px solid var(--accent3);
+    background: transparent;
+    color: var(--accent3);
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 6px;
+  }
+  .reveal-btn:hover { background: rgba(245,158,11,0.15); }
+  .answer-box {
+    display: none;
+    margin-top: 12px;
+    padding: 14px 18px;
+    background: rgba(16,185,129,0.1);
+    border: 1px solid rgba(16,185,129,0.3);
+    border-radius: 12px;
+    color: #6EE7B7;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  .answer-box.show { display: block; }
+  .feedback-box {
+    margin-top: 12px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: 14px;
+    line-height: 1.6;
+    font-weight: 600;
+  }
+  .feedback-box.correct { background: rgba(16,185,129,0.15); color: #6EE7B7; border: 1px solid rgba(16,185,129,0.3); }
+  .feedback-box.wrong { background: rgba(239,68,68,0.12); color: #FCA5A5; border: 1px solid rgba(239,68,68,0.25); }
+  /* KUIS */
+  .quiz-progress {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .progress-bar {
+    flex: 1;
+    height: 8px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 99px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent1), var(--accent2));
+    border-radius: 99px;
+    transition: width 0.4s ease;
+  }
+  .progress-text { font-size: 13px; color: var(--muted); font-weight: 700; min-width: 50px; text-align: right; }
+  .quiz-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 32px 28px;
+    margin-bottom: 20px;
+    animation: slideIn 0.3s ease;
+  }
+  @keyframes slideIn { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+  .quiz-q-num {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .quiz-question {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 28px;
+    line-height: 1.4;
+    color: var(--text);
+  }
+  .quiz-options { display: grid; gap: 10px; }
+  .quiz-opt {
+    padding: 14px 20px;
+    border-radius: 14px;
+    border: 1.5px solid var(--border);
+    background: transparent;
+    color: var(--text);
+    font-family: 'Nunito', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .quiz-opt:hover:not(.disabled) { border-color: var(--accent1); background: rgba(124,58,237,0.12); transform: translateX(4px); }
+  .quiz-opt.correct { border-color: var(--accent4) !important; background: rgba(16,185,129,0.15) !important; }
+  .quiz-opt.wrong { border-color: #EF4444 !important; background: rgba(239,68,68,0.12) !important; }
+  .quiz-opt.disabled { cursor: default; pointer-events: none; }
+  .quiz-opt .opt-letter {
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+  .quiz-feedback {
+    margin-top: 16px;
+    padding: 14px 18px;
+    border-radius: 14px;
+    font-size: 15px;
+    font-weight: 700;
+    display: none;
+  }
+  .quiz-feedback.show { display: block; }
+  .quiz-feedback.correct-fb { background: rgba(16,185,129,0.15); color: #6EE7B7; border: 1px solid rgba(16,185,129,0.3); }
+  .quiz-feedback.wrong-fb { background: rgba(239,68,68,0.12); color: #FCA5A5; border: 1px solid rgba(239,68,68,0.25); }
+  .next-btn, .restart-btn {
+    padding: 14px 36px;
+    border-radius: 14px;
+    border: none;
+    background: linear-gradient(135deg, var(--accent1), var(--accent2));
+    color: white;
+    font-family: 'Nunito', sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 10px;
+    display: none;
+    box-shadow: 0 4px 20px rgba(124,58,237,0.4);
+  }
+  .next-btn:hover, .restart-btn:hover { transform: translateY(-2px); }
+  .score-screen { text-align: center; padding: 20px 0; animation: slideIn 0.4s ease; }
+  .score-emoji { font-size: 80px; display: block; margin-bottom: 16px; animation: float 2s infinite; }
+  .score-big {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 72px;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--accent3), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .score-label { font-size: 18px; color: var(--muted); margin-bottom: 24px; }
+  .score-msg { font-size: 17px; font-weight: 700; color: var(--text); margin-bottom: 28px; }
+  /* VIDEO */
+  .vid-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 18px;
+    transition: transform 0.2s;
+  }
+  .vid-card:hover { transform: translateY(-4px); }
+  .vid-thumb {
+    width: 100%;
+    height: 160px;
+    background: linear-gradient(135deg, rgba(124,58,237,0.3), rgba(6,182,212,0.3));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 56px;
+    text-decoration: none;
+  }
+  .vid-info { padding: 16px 20px; }
+  .vid-title { font-weight: 800; font-size: 15px; margin-bottom: 6px; color: var(--text); }
+  .vid-meta { font-size: 13px; color: var(--muted); margin-bottom: 10px; }
+  .vid-link {
+    display: inline-block;
+    padding: 8px 18px;
+    border-radius: 10px;
+    background: #FF0000;
+    color: white;
+    font-size: 13px;
+    font-weight: 800;
+    text-decoration: none;
+  }
+  footer {
+    text-align: center;
+    padding: 32px 20px;
+    color: var(--muted);
+    font-size: 13px;
+    border-top: 1px solid var(--border);
+  }
+  @media (max-width: 600px) {
+    .options { grid-template-columns: 1fr; }
+    .quiz-question { font-size: 17px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <span class="molecule-emoji">⚗️</span>
+  <div class="hero-badge">Kimia SMA · Kelas X</div>
+  <h1>Tata Nama Senyawa Biner Kovalen</h1>
+  <p>Belajar interaktif: materi lengkap, latihan soal, dan kuis seru! 🚀</p>
+</div>
+
+<nav class="tabs">
+  <button class="tab-btn active" onclick="showTab('materi',this)">📚 Materi</button>
+  <button class="tab-btn" onclick="showTab('latihan',this)">✏️ Latihan</button>
+  <button class="tab-btn" onclick="showTab('kuis',this)">🎯 Kuis</button>
+  <button class="tab-btn" onclick="showTab('video',this)">▶️ Video</button>
+</nav>
+
+<!-- MATERI -->
+<section class="section active" id="materi">
+  <div class="section-heading">🧪 Apa itu Senyawa Kovalen?</div>
+  <div class="card">
+    <span class="card-icon">🔗</span>
+    <h3>Definisi</h3>
+    <p>Senyawa kovalen biner adalah senyawa yang terbentuk dari <strong style="color:#C4B5FD">dua unsur nonlogam</strong> yang berikatan kovalen (berbagi elektron). Disebut <em>biner</em> karena terdiri dari tepat 2 unsur.</p>
+    <br><p>Contoh unsur nonlogam: C, N, O, F, Cl, Br, I, S, P, Si, dsb.</p>
+  </div>
+  <div class="card">
+    <span class="card-icon">📋</span>
+    <h3>Aturan Tata Nama (IUPAC)</h3>
+    <ul>
+      <li><span class="highlight">Aturan 1</span> — Unsur pertama disebut dengan nama aslinya</li>
+      <li style="margin-top:8px"><span class="highlight">Aturan 2</span> — Unsur kedua diberi akhiran <strong style="color:#F59E0B">–ida</strong></li>
+      <li style="margin-top:8px"><span class="highlight">Aturan 3</span> — Gunakan <strong style="color:#06B6D4">awalan Yunani</strong> untuk menyatakan jumlah atom tiap unsur</li>
+      <li style="margin-top:8px"><span class="highlight">Aturan 4</span> — Awalan <em>mono–</em> <strong style="color:#EF4444">tidak digunakan</strong> pada unsur pertama</li>
+      <li style="margin-top:8px"><span class="highlight">Aturan 5</span> — Jika awalan berakhir vokal dan nama unsur dimulai vokal, vokal awalan dihilangkan<br><small style="color:#94A3B8">contoh: penta + oksida → pentoksida</small></li>
+    </ul>
+  </div>
+  <div class="card">
+    <span class="card-icon">🔢</span>
+    <h3>Tabel Awalan Yunani</h3>
+    <table class="prefix-table">
+      <thead><tr><th>Angka</th><th>Awalan</th><th>Contoh</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td><span class="highlight">mono–</span></td><td>karbon monoksida (CO)</td></tr>
+        <tr><td>2</td><td><span class="highlight">di–</span></td><td>karbon dioksida (CO₂)</td></tr>
+        <tr><td>3</td><td><span class="highlight">tri–</span></td><td>sulfur trioksida (SO₃)</td></tr>
+        <tr><td>4</td><td><span class="highlight">tetra–</span></td><td>karbon tetraklorida (CCl₄)</td></tr>
+        <tr><td>5</td><td><span class="highlight">penta–</span></td><td>fosfor pentaklorida (PCl₅)</td></tr>
+        <tr><td>6</td><td><span class="highlight">heksa–</span></td><td>sulfur heksafluorida (SF₆)</td></tr>
+        <tr><td>7</td><td><span class="highlight">hepta–</span></td><td>diklor heptaoksida (Cl₂O₇)</td></tr>
+        <tr><td>8</td><td><span class="highlight">okta–</span></td><td>oktasulfida</td></tr>
+        <tr><td>9</td><td><span class="highlight">nona–</span></td><td>nonaoksida</td></tr>
+        <tr><td>10</td><td><span class="highlight">deka–</span></td><td>dekaoksida</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card">
+    <span class="card-icon">✨</span>
+    <h3>Contoh Senyawa Lengkap</h3>
+    <div>
+      <div class="example-chip">CO <span class="arrow">→</span> karbon monoksida</div>
+      <div class="example-chip">CO₂ <span class="arrow">→</span> karbon dioksida</div>
+      <div class="example-chip">NO₂ <span class="arrow">→</span> nitrogen dioksida</div>
+      <div class="example-chip">N₂O₄ <span class="arrow">→</span> dinitrogen tetraoksida</div>
+      <div class="example-chip">SO₃ <span class="arrow">→</span> sulfur trioksida</div>
+      <div class="example-chip">PCl₅ <span class="arrow">→</span> fosfor pentaklorida</div>
+      <div class="example-chip">CCl₄ <span class="arrow">→</span> karbon tetraklorida</div>
+      <div class="example-chip">N₂O <span class="arrow">→</span> dinitrogen monoksida</div>
+      <div class="example-chip">Cl₂O₇ <span class="arrow">→</span> diklor heptaoksida</div>
+      <div class="example-chip">SF₆ <span class="arrow">→</span> sulfur heksafluorida</div>
+    </div>
+  </div>
+  <div class="card">
+    <span class="card-icon">⚠️</span>
+    <h3>Nama Lazim Senyawa Kovalen</h3>
+    <ul>
+      <li><span class="highlight">H₂O</span> → air</li>
+      <li><span class="highlight">NH₃</span> → amonia</li>
+      <li><span class="highlight">N₂H₄</span> → hidrazin</li>
+      <li><span class="highlight">NO</span> → nitrogen oksida</li>
+      <li><span class="highlight">PH₃</span> → fosfin</li>
+    </ul>
+    <p style="margin-top:12px;color:#94A3B8;font-size:14px">💡 Nama lazim tetap diterima dalam kimia sehari-hari.</p>
+  </div>
+</section>
+
+<!-- LATIHAN -->
+<section class="section" id="latihan">
+  <div class="section-heading">✏️ Latihan Soal</div>
+
+  <div class="soal-card">
+    <div class="soal-badge badge-mudah">🟢 Mudah · Pilihan Ganda</div>
+    <div class="soal-text">1. Apa nama IUPAC yang benar untuk senyawa SO₂?</div>
+    <div class="formula-big">SO₂</div>
+    <div class="options" id="opts1">
+      <button class="opt" data-soal="1" data-type="wrong" data-msg="Bukan. Awalan mono tidak dipakai untuk unsur pertama.">A. Monosulfur dioksida</button>
+      <button class="opt" data-soal="1" data-type="correct" data-msg="Benar! Sulfur = unsur pertama (tanpa mono), di = 2 oksigen, oksida = akhiran -ida.">B. Sulfur dioksida</button>
+      <button class="opt" data-soal="1" data-type="wrong" data-msg="Bukan. Trioksida = 3 atom O, padahal di sini ada 2.">C. Sulfur trioksida</button>
+      <button class="opt" data-soal="1" data-type="wrong" data-msg="Bukan. Urutan penamaannya terbalik.">D. Dioksida sulfur</button>
+    </div>
+    <div class="feedback-box" id="fb1" style="display:none"></div>
+  </div>
+
+  <div class="soal-card">
+    <div class="soal-badge badge-mudah">🟢 Mudah · Pilihan Ganda</div>
+    <div class="soal-text">2. Rumus kimia dari "dinitrogen pentaoksida" adalah...</div>
+    <div class="options" id="opts2">
+      <button class="opt" data-soal="2" data-type="wrong" data-msg="Bukan. N2O3 = dinitrogen trioksida.">A. N₂O₃</button>
+      <button class="opt" data-soal="2" data-type="wrong" data-msg="Bukan. NO5 tidak punya awalan di- pada nitrogen.">B. NO₅</button>
+      <button class="opt" data-soal="2" data-type="correct" data-msg="Benar! Di = 2 atom N, penta = 5 atom O, maka N2O5.">C. N₂O₅</button>
+      <button class="opt" data-soal="2" data-type="wrong" data-msg="Bukan. N4O5 berarti tetranitrogen pentaoksida.">D. N₄O₅</button>
+    </div>
+    <div class="feedback-box" id="fb2" style="display:none"></div>
+  </div>
+
+  <div class="soal-card">
+    <div class="soal-badge badge-sedang">🟡 Sedang · Isian</div>
+    <div class="soal-text">3. Tuliskan nama IUPAC senyawa-senyawa berikut:</div>
+    <div style="margin:12px 0; font-size:15px; color:#CBD5E1; line-height:2.4">
+      a) PCl₃ = ___________<br>
+      b) N₂O = ___________<br>
+      c) CCl₄ = ___________<br>
+      d) Cl₂O₇ = ___________
+    </div>
+    <button class="reveal-btn" id="rb3">Lihat Jawaban 👁️</button>
+    <div class="answer-box" id="ans3">
+      <strong>Jawaban:</strong><br>
+      a) <strong>Fosfor triklorida</strong> — P = fosfor, tri = 3, Cl = klorida<br>
+      b) <strong>Dinitrogen monoksida</strong> — di = 2N, mono = 1O<br>
+      c) <strong>Karbon tetraklorida</strong> — tetra = 4 Cl<br>
+      d) <strong>Diklor heptaoksida</strong> — di = 2 Cl, hepta = 7 O
+    </div>
+  </div>
+
+  <div class="soal-card">
+    <div class="soal-badge badge-sedang">🟡 Sedang · Analisis</div>
+    <div class="soal-text">4. Manakah penamaan yang SALAH?</div>
+    <div class="options" id="opts4">
+      <button class="opt" data-soal="4" data-type="wrong" data-msg="CO2 = karbon dioksida itu BENAR. Bukan ini jawabannya.">A. CO₂ = karbon dioksida</button>
+      <button class="opt" data-soal="4" data-type="correct" data-msg="Benar! Ini SALAH karena mono tidak boleh dipakai untuk unsur pertama. Yang benar: nitrogen monoksida.">B. NO = monoNitrogen monoksida</button>
+      <button class="opt" data-soal="4" data-type="wrong" data-msg="SO3 = sulfur trioksida itu BENAR. Bukan ini jawabannya.">C. SO₃ = sulfur trioksida</button>
+      <button class="opt" data-soal="4" data-type="wrong" data-msg="PCl5 = fosfor pentaklorida itu BENAR. Bukan ini jawabannya.">D. PCl₅ = fosfor pentaklorida</button>
+    </div>
+    <div class="feedback-box" id="fb4" style="display:none"></div>
+  </div>
+
+  <div class="soal-card">
+    <div class="soal-badge badge-sulit">🔴 HOTS · Analisis</div>
+    <div class="soal-text">5. Gas tertawa memiliki rumus N₂O. Pernyataan yang TEPAT adalah...</div>
+    <div class="options" id="opts5" style="grid-template-columns:1fr">
+      <button class="opt" data-soal="5" data-type="wrong" data-msg="Kurang tepat. Nama IUPAC-nya adalah dinitrogen monoksida, bukan nitrogen monoksida.">A. Nama IUPAC-nya adalah nitrogen monoksida</button>
+      <button class="opt" data-soal="5" data-type="correct" data-msg="Benar! Di = 2N, mono = 1O. Nama lazim gas tertawa juga diterima.">B. Nama IUPAC-nya dinitrogen monoksida, nama lazimnya gas tertawa</button>
+      <button class="opt" data-soal="5" data-type="wrong" data-msg="Bukan. N2O4 = dinitrogen tetraoksida, berbeda dengan N2O.">C. Rumusnya N₂O₄ sesuai aturan IUPAC</button>
+      <button class="opt" data-soal="5" data-type="wrong" data-msg="Tidak tepat. N2O adalah senyawa kovalen antara dua nonlogam, bukan ionik.">D. N₂O adalah senyawa ionik</button>
+    </div>
+    <div class="feedback-box" id="fb5" style="display:none"></div>
+  </div>
+
+  <div class="soal-card">
+    <div class="soal-badge badge-sulit">🔴 Essay</div>
+    <div class="soal-text">6. Jelaskan perbedaan CO dan CO₂! Mengapa keduanya punya nama berbeda meski unsur penyusunnya sama?</div>
+    <button class="reveal-btn" id="rb6">Lihat Jawaban 👁️</button>
+    <div class="answer-box" id="ans6">
+      <strong>Jawaban:</strong><br>
+      CO = <strong>karbon monoksida</strong> (1C, 1O) — gas beracun hasil pembakaran tidak sempurna.<br><br>
+      CO₂ = <strong>karbon dioksida</strong> (1C, 2O) — gas hasil pernapasan dan pembakaran sempurna.<br><br>
+      Meski unsur penyusunnya sama (C dan O), <strong>jumlah atomnya berbeda</strong> sehingga sifat dan namanya juga berbeda. Inilah mengapa awalan Yunani sangat penting!
+    </div>
+  </div>
+</section>
+
+<!-- KUIS -->
+<section class="section" id="kuis">
+  <div class="section-heading">🎯 Kuis Interaktif</div>
+  <div id="quiz-container"></div>
+</section>
+
+<!-- VIDEO -->
+<section class="section" id="video">
+  <div class="section-heading">▶️ Video Pembelajaran</div>
+  <p style="color:var(--muted);font-size:14px;margin-bottom:24px">Rekomendasi video YouTube untuk memperdalam materi:</p>
+  <div class="vid-card">
+    <div class="vid-thumb">⚗️</div>
+    <div class="vid-info">
+      <div class="vid-title">Tata Nama Senyawa Kovalen — Kimia SMA Kelas X</div>
+      <div class="vid-meta">Materi lengkap: pengertian, aturan IUPAC, dan contoh soal</div>
+      <a class="vid-link" href="https://www.youtube.com/results?search_query=tata+nama+senyawa+kovalen+biner+SMA+kelas+X" target="_blank">🔴 Tonton di YouTube</a>
+    </div>
+  </div>
+  <div class="vid-card">
+    <div class="vid-thumb">🔬</div>
+    <div class="vid-info">
+      <div class="vid-title">Awalan Yunani Tata Nama Kovalen + Latihan Soal</div>
+      <div class="vid-meta">Fokus latihan soal dengan awalan mono, di, tri, tetra, penta...</div>
+      <a class="vid-link" href="https://www.youtube.com/results?search_query=soal+tata+nama+senyawa+kovalen+biner+awalan+yunani" target="_blank">🔴 Tonton di YouTube</a>
+    </div>
+  </div>
+  <div class="vid-card">
+    <div class="vid-thumb">🧬</div>
+    <div class="vid-info">
+      <div class="vid-title">Ikatan Kovalen Animasi — Visualisasi Kimia SMA</div>
+      <div class="vid-meta">Penjelasan visual animasi tentang ikatan kovalen dan cara penamaannya</div>
+      <a class="vid-link" href="https://www.youtube.com/results?search_query=ikatan+kovalen+animasi+kimia+SMA" target="_blank">🔴 Tonton di YouTube</a>
+    </div>
+  </div>
+  <div style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.3);border-radius:16px;padding:18px 20px;margin-top:8px">
+    <p style="font-size:14px;color:#FCD34D;font-weight:700;margin-bottom:6px">💡 Tips Belajar dari Video</p>
+    <p style="font-size:13px;color:#94A3B8;line-height:1.7">Sambil nonton, coba tulis sendiri nama senyawanya sebelum jawabannya disebutkan. Cara ini jauh lebih efektif daripada menonton pasif!</p>
+  </div>
+</section>
+
+<footer>
+  <p>⚗️ Materi Kimia SMA · Tata Nama Senyawa Biner Kovalen</p>
+  <p style="margin-top:6px">Semangat belajar! Kamu pasti bisa 🚀</p>
+</footer>
+
+<script>
+// TAB
+function showTab(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  if (id === 'kuis') initQuiz();
+}
+
+// LATIHAN — event delegation, no inline quotes
+document.addEventListener('DOMContentLoaded', function() {
+  // PG soal
+  ['opts1','opts2','opts4','opts5'].forEach(function(id) {
+    var container = document.getElementById(id);
+    if (!container) return;
+    container.addEventListener('click', function(e) {
+      var btn = e.target.closest('.opt');
+      if (!btn || btn.classList.contains('disabled')) return;
+      var soal = btn.dataset.soal;
+      var type = btn.dataset.type;
+      var msg = btn.dataset.msg;
+      // disable all opts in this group
+      container.querySelectorAll('.opt').forEach(function(o) {
+        o.classList.add('disabled');
+      });
+      btn.classList.add(type);
+      var fb = document.getElementById('fb' + soal);
+      if (fb) {
+        fb.textContent = (type === 'correct' ? '✅ ' : '❌ ') + msg;
+        fb.className = 'feedback-box ' + (type === 'correct' ? 'correct' : 'wrong');
+        fb.style.display = 'block';
+      }
+    });
+  });
+
+  // Reveal buttons
+  [3, 6].forEach(function(n) {
+    var btn = document.getElementById('rb' + n);
+    var box = document.getElementById('ans' + n);
+    if (!btn || !box) return;
+    btn.addEventListener('click', function() {
+      if (box.classList.contains('show')) {
+        box.classList.remove('show');
+        btn.textContent = 'Lihat Jawaban 👁️';
+      } else {
+        box.classList.add('show');
+        btn.textContent = 'Sembunyikan Jawaban 🙈';
+      }
+    });
+  });
+});
+
+// KUIS
+var quizData = [
+  { q: 'Nama IUPAC untuk CO₂ adalah...', opts: ['Karbon oksida','Karbon dioksida','Dikarbon oksida','Karbon monoksida'], ans: 1, exp: 'CO₂: C = karbon (tanpa mono di unsur pertama), O₂ = dioksida.' },
+  { q: 'Rumus kimia fosfor pentaklorida adalah...', opts: ['PCl₃','PCl₄','PCl₅','P₂Cl₅'], ans: 2, exp: 'Fosfor = P, penta = 5, klorida = Cl, maka PCl₅.' },
+  { q: 'Mengapa awalan mono tidak digunakan pada unsur pertama?', opts: ['Karena aturan IUPAC melarangnya','Karena mono hanya untuk oksigen','Karena sudah jelas hanya 1 atom','Karena terlalu panjang'], ans: 0, exp: 'Aturan IUPAC menetapkan mono tidak digunakan pada unsur pertama dalam tata nama kovalen.' },
+  { q: 'Nama senyawa N₂O₄ adalah...', opts: ['Nitrogen tetraoksida','Dinitrogen oksida','Dinitrogen tetraoksida','Nitrogen dioksida'], ans: 2, exp: 'N₂ = dinitrogen, O₄ = tetraoksida, maka dinitrogen tetraoksida.' },
+  { q: 'Senyawa SF₆ memiliki nama...', opts: ['Sulfur fluorida','Sulfur heksafluorida','Heksa sulfur fluorida','Sulfur trifluorida'], ans: 1, exp: 'S = sulfur, F₆ = heksafluorida (heksa = 6), maka sulfur heksafluorida.' },
+  { q: 'Penulisan "penta + oksida" yang benar adalah...', opts: ['pentaoksida','pentoksida','pent-oksida','pentaoksid'], ans: 1, exp: 'Vokal akhir awalan penta (a) + unsur mulai vokal (oksida) = vokal awalan dihilangkan, jadi pentoksida.' },
+  { q: 'Rumus kimia dinitrogen monoksida adalah...', opts: ['NO','N₂O','N₂O₂','NO₂'], ans: 1, exp: 'Di = 2 N, mono = 1 O, maka N₂O.' },
+  { q: 'Senyawa kovalen biner tersusun dari...', opts: ['logam + nonlogam','dua logam','dua nonlogam','logam + logam'], ans: 2, exp: 'Kovalen biner = dua unsur nonlogam yang berikatan kovalen.' }
+];
+
+var qIdx = 0, score = 0, answered = false;
+
+function initQuiz() {
+  qIdx = 0; score = 0; answered = false;
+  renderQuiz();
+}
+
+function renderQuiz() {
+  var c = document.getElementById('quiz-container');
+  if (qIdx >= quizData.length) { showScore(c); return; }
+  var q = quizData[qIdx];
+  var letters = ['A','B','C','D'];
+  var optsHTML = q.opts.map(function(o, i) {
+    return '<button class="quiz-opt" data-qidx="' + i + '"><span class="opt-letter">' + letters[i] + '</span>' + o + '</button>';
+  }).join('');
+  c.innerHTML =
+    '<div class="quiz-progress">' +
+      '<div class="progress-bar"><div class="progress-fill" style="width:' + (qIdx/quizData.length*100) + '%"></div></div>' +
+      '<div class="progress-text">' + (qIdx+1) + '/' + quizData.length + '</div>' +
+    '</div>' +
+    '<div class="quiz-card">' +
+      '<div class="quiz-q-num">Pertanyaan ' + (qIdx+1) + '</div>' +
+      '<div class="quiz-question">' + q.q + '</div>' +
+      '<div class="quiz-options" id="qopts">' + optsHTML + '</div>' +
+      '<div class="quiz-feedback" id="qfb"></div>' +
+    '</div>' +
+    '<button class="next-btn" id="qnext">' + (qIdx < quizData.length-1 ? 'Soal Berikutnya →' : 'Lihat Hasil 🏆') + '</button>';
+
+  document.getElementById('qopts').addEventListener('click', function(e) {
+    var btn = e.target.closest('.quiz-opt');
+    if (!btn || answered) return;
+    answered = true;
+    var idx = parseInt(btn.dataset.qidx);
+    var q = quizData[qIdx];
+    document.querySelectorAll('.quiz-opt').forEach(function(o) { o.classList.add('disabled'); });
+    var fb = document.getElementById('qfb');
+    if (idx === q.ans) {
+      btn.classList.add('correct');
+      score++;
+      fb.textContent = '✅ Benar! ' + q.exp;
+      fb.className = 'quiz-feedback show correct-fb';
+    } else {
+      btn.classList.add('wrong');
+      document.querySelectorAll('.quiz-opt')[q.ans].classList.add('correct');
+      fb.textContent = '❌ Salah. ' + q.exp;
+      fb.className = 'quiz-feedback show wrong-fb';
+    }
+    document.getElementById('qnext').style.display = 'inline-block';
+  });
+
+  document.getElementById('qnext').addEventListener('click', function() {
+    qIdx++; answered = false; renderQuiz();
+  });
+}
+
+function showScore(c) {
+  var pct = Math.round(score/quizData.length*100);
+  var emoji = pct>=90?'🏆':pct>=70?'⭐':pct>=50?'💪':'😅';
+  var msg = pct>=90?'Luar biasa! Kamu ahli tata nama kovalen!':pct>=70?'Bagus! Sedikit lagi jadi master kimia!':pct>=50?'Lumayan! Coba pelajari lagi materinya ya.':'Jangan menyerah, coba lagi ya!';
+  c.innerHTML =
+    '<div class="score-screen">' +
+      '<span class="score-emoji">' + emoji + '</span>' +
+      '<div class="score-big">' + pct + '%</div>' +
+      '<div class="score-label">Skor: ' + score + ' dari ' + quizData.length + ' soal</div>' +
+      '<div class="score-msg">' + msg + '</div>' +
+      '<button class="restart-btn" style="display:inline-block" id="qrestart">🔄 Ulangi Kuis</button>' +
+    '</div>';
+  document.getElementById('qrestart').addEventListener('click', initQuiz);
+}
+</script>
+</body>
+</html>
